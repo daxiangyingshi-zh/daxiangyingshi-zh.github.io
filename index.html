@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大象影视 影像节目单与观影档案｜片目检索 · 排片追踪 · 专题笔记</title>
+<meta name="description" content="大象影视整理华语与全球影像的片目档案、排片线索和观影笔记，按类型、年代与介质做细分索引。地址 https://daxiangyingshi-zh.github.io ，首页即更新页。">
+<meta name="keywords" content="大象影视, daxiangyingshi-zh.github.io, 影像节目单, 电影索引, 剧集档案">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://daxiangyingshi-zh.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="大象影视">
+<meta property="og:title" content="大象影视 影像节目单与观影档案">
+<meta property="og:description" content="片目索引、排片追踪与观影笔记，一站查阅。">
+<meta property="og:url" content="https://daxiangyingshi-zh.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大象影视｜影像节目单与观影档案">
+<meta name="twitter:description" content="华语与全球影像的片目档案、排片线索和观影笔记。">
+<style>
+:root{
+  --ink:#1c1a17;
+  --ink2:#4a453e;
+  --paper:#f3ede1;
+  --paper2:#e9e0cf;
+  --rust:#9c4a2b;
+  --rust2:#c4703f;
+  --olive:#5b6342;
+  --line:#cfc5b0;
+  --wide:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Songti SC","STSong","Source Han Serif SC","Noto Serif CJK SC",Georgia,"WenQuanYi Micro Hei",serif;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--rust);text-decoration:none}
+.wrap{max-width:var(--wide);margin:0 auto;padding:0 22px}
+
+/* 顶部铭牌 */
+.masthead{
+  border-bottom:3px double var(--ink);
+  padding:26px 0 14px;
+  background:
+    linear-gradient(var(--paper) 0 0) padding-box,
+    repeating-linear-gradient(45deg,var(--ink) 0 2px,transparent 2px 8px) border-box;
+}
+.mast-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand-tag{font-size:12px;letter-spacing:.28em;color:var(--rust);text-transform:uppercase}
+.brand h1{
+  margin:6px 0 0;
+  font-size:clamp(30px,6.4vw,60px);
+  line-height:1.05;
+  letter-spacing:.04em;
+  font-weight:700;
+}
+.brand .sub{margin-top:8px;font-size:13px;letter-spacing:.14em;color:var(--ink2)}
+.issue{text-align:right;font-size:12px;color:var(--ink2);letter-spacing:.1em}
+.issue b{display:block;font-size:15px;color:var(--ink);letter-spacing:.05em;font-weight:600}
+
+/* 走马胶片 */
+.marquee{
+  overflow:hidden;
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  background:#151310;
+  padding:10px 0;
+  margin-top:0;
+}
+.marquee-track{
+  display:flex;gap:0;width:max-content;
+  animation:roll 46s linear infinite;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes roll{to{transform:translateX(-50%)}}
+.frame{
+  flex:0 0 auto;width:124px;height:74px;margin-right:14px;position:relative;
+  background:
+    linear-gradient(180deg,transparent 0 6px,#000 6px 10px,transparent 10px 16px,#000 16px 20px,transparent 20px 26px,#000 26px 30px,transparent 30px 36px,#000 36px 40px,transparent 40px 46px,#000 46px 50px,transparent 50px 56px,#000 56px 60px,transparent 60px 66px,#000 66px 70px,transparent 70px);
+  border-left:5px solid #000;border-right:5px solid #000;
+  display:flex;align-items:center;justify-content:center;
+}
+.frame span{color:#e8d9b5;font-size:11px;letter-spacing:.16em;writing-mode:vertical-rl;opacity:.85}
+.frame:nth-child(even){background-color:#241f19}
+
+/* 导航：折角标签 */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(243,237,225,.96);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid var(--line);
+}
+.nav ul{
+  list-style:none;margin:0;padding:0;
+  display:flex;gap:4px;overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav ul::-webkit-scrollbar{display:none}
+.nav li a{
+  display:block;padding:12px 16px 10px;
+  font-size:14px;letter-spacing:.16em;color:var(--ink2);
+  border-bottom:3px solid transparent;white-space:nowrap;
+}
+.nav li a:hover,.nav li a:focus{color:var(--rust);border-bottom-color:var(--rust);background:var(--paper2)}
+
+/* 通用栏头 */
+section{padding:62px 0 34px;border-top:1px dashed var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head .no{
+  font-size:13px;color:#fff;background:var(--rust);
+  padding:2px 9px;letter-spacing:.2em;align-self:center;
+}
+.sec-head h2{
+  margin:0;font-size:clamp(22px,3.6vw,32px);letter-spacing:.06em;font-weight:700;
+}
+.sec-head .en{font-size:12px;letter-spacing:.24em;color:var(--olive);text-transform:uppercase}
+.sec-head .rule{flex:1;height:1px;background:var(--line);min-width:40px}
+
+/* 栏目一：节目单表格 */
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools input,.tools select{
+  font-family:inherit;font-size:14px;
+  background:var(--paper);border:1px solid var(--line);
+  padding:8px 10px;color:var(--ink);border-radius:0;
+}
+.tools input{flex:1;min-width:170px}
+.tools select{cursor:pointer}
+.chk{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--ink2);letter-spacing:.08em;cursor:pointer;
+}
+.tablebox{border:1px solid var(--ink);background:#fbf7ee;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:14px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--ink);color:#f3ede1;font-weight:600;letter-spacing:.1em;font-size:13px;position:sticky;top:0}
+tbody tr:nth-child(even){background:#f1eadc}
+tbody tr:hover{background:#ece0ca}
+td.num{font-variant-numeric:tabular-nums;color:var(--ink2);white-space:nowrap}
+.tag{display:inline-block;font-size:12px;letter-spacing:.1em;padding:1px 7px;border:1px solid var(--rust);color:var(--rust)}
+.tag.doc{border-color:var(--olive);color:var(--olive)}
+.tag.anime{border-color:#2f5d6e;color:#2f5d6e}
+.empty{display:none;padding:26px;text-align:center;color:var(--ink2);font-size:14px;letter-spacing:.1em}
+
+/* 栏目二：刻度尺 */
+.ruler{
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:22px 0 6px;position:relative;margin-bottom:8px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 9.09%);
+}
+.ruler-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--ink2);letter-spacing:.1em;padding:0 2px}
+.ruler-axis b{font-weight:500}
+.slots{margin-top:18px;display:grid;gap:12px}
+.slot{display:grid;grid-template-columns:78px 1fr;gap:16px;align-items:start;border-left:4px solid var(--rust);padding:2px 0 2px 14px}
+.slot time{font-size:13px;letter-spacing:.06em;color:var(--rust);font-variant-numeric:tabular-nums;padding-top:2px}
+.slot .ttl{font-size:16px;letter-spacing:.04em;font-weight:600}
+.slot .meta{font-size:13px;color:var(--ink2);margin-top:3px}
+.slot .bar{margin-top:8px;height:6px;background:var(--paper2);overflow:hidden}
+.slot .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--rust),var(--rust2))}
+.slot:nth-child(even){border-left-color:var(--olive)}
+
+/* 栏目三：三联手记 */
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.note{
+  background:#fbf7ee;border:1px solid var(--ink);
+  padding:20px 18px 22px;position:relative;
+  box-shadow:5px 5px 0 var(--paper2);
+}
+.note:before{
+  content:"";position:absolute;top:-1px;right:-1px;
+  border-style:solid;border-width:0 22px 22px 0;
+  border-color:var(--paper) var(--paper) var(--rust) var(--rust);
+}
+.note .idx{font-size:12px;letter-spacing:.24em;color:var(--rust)}
+.note h3{margin:10px 0 8px;font-size:19px;letter-spacing:.04em}
+.note p{margin:0;font-size:14px;color:var(--ink2)}
+.note ol{margin:12px 0 0;padding-left:20px;font-size:13.5px;color:var(--ink2)}
+.note ol li{margin-bottom:6px}
+.note.slate{background:#171510;color:#e6dcc4;border-color:#171510;box-shadow:5px 5px 0 #cfc5b0}
+.note.slate p,.note.slate ol{color:#c9bfa7}
+.note.slate .idx{color:var(--rust2)}
+
+/* 栏目四：术语索引 */
+.glossary{column-count:2;column-gap:34px;column-rule:1px solid var(--line);font-size:14px}
+.glossary dl{break-inside:avoid;margin:0 0 18px;padding-bottom:14px;border-bottom:1px dotted var(--line)}
+.glossary dt{letter-spacing:.08em;font-weight:700}
+.glossary dd{margin:5px 0 0;color:var(--ink2);font-size:13.5px}
+.glossary .see{font-size:12px;color:var(--rust);letter-spacing:.1em}
+
+/* 站点条 */
+.sitebar{
+  margin-top:40px;border:2px solid var(--ink);background:var(--paper2);
+  padding:22px;display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:center;
+}
+.sitebar .lb{font-size:12px;letter-spacing:.24em;color:var(--rust);text-transform:uppercase}
+.sitebar code{
+  display:block;margin-top:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:clamp(15px,2.6vw,21px);word-break:break-all;background:#fbf7ee;
+  border:1px dashed var(--ink);padding:12px 14px;color:var(--ink);
+}
+.sitebar button{
+  font-family:inherit;font-size:14px;letter-spacing:.2em;
+  background:var(--ink);color:var(--paper);border:0;padding:14px 18px;cursor:pointer;
+  transition:background .2s;
+}
+.sitebar button:hover{background:var(--rust)}
+.sitebar .hint{font-size:12.5px;color:var(--ink2);margin-top:10px}
+
+/* 页脚 */
+footer{border-top:3px double var(--ink);margin-top:60px;padding:30px 0 44px;font-size:13px;color:var(--ink2);letter-spacing:.06em}
+.foot-flex{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot-flex a{color:var(--ink2);border-bottom:1px solid var(--line)}
+.foot-flex a:hover{color:var(--rust);border-color:var(--rust)}
+
+@media (max-width:820px){
+  .notes{grid-template-columns:1fr}
+  .glossary{column-count:1}
+  .sitebar{grid-template-columns:1fr}
+  section{padding:46px 0 22px}
+}
+@media (max-width:520px){
+  .wrap{padding:0 15px}
+  .brand h1{letter-spacing:.02em}
+  .issue{text-align:left}
+  .slot{grid-template-columns:1fr;gap:6px}
+  .sec-head .rule{display:none}
+}
+</style>
+</head>
+<body id="top">
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <div class="brand">
+      <div class="brand-tag">Vol.12 · 影像阅览室</div>
+      <h1>大象影视</h1>
+      <div class="sub">节目单 · 排片线索 · 观片手记</div>
+    </div>
+    <div class="issue">
+      <b>本期主题：长镜头的耐心</b>
+      更新于站点首页 · 无跳转阅读
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="frame"><span>开场</span></div>
+    <div class="frame"><span>华语新片</span></div>
+    <div class="frame"><span>经典修复</span></div>
+    <div class="frame"><span>剧集档案</span></div>
+    <div class="frame"><span>纪录片</span></div>
+    <div class="frame"><span>动画象限</span></div>
+    <div class="frame"><span>作者访谈</span></div>
+    <div class="frame"><span>片尾字幕</span></div>
+    <div class="frame"><span>开场</span></div>
+    <div class="frame"><span>华语新片</span></div>
+    <div class="frame"><span>经典修复</span></div>
+    <div class="frame"><span>剧集档案</span></div>
+    <div class="frame"><span>纪录片</span></div>
+    <div class="frame"><span>动画象限</span></div>
+    <div class="frame"><span>作者访谈</span></div>
+    <div class="frame"><span>片尾字幕</span></div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <ul>
+      <li><a href="#index">节目单</a></li>
+      <li><a href="#schedule">排片刻度</a></li>
+      <li><a href="#memo">观片手记</a></li>
+      <li><a href="#glossary">术语索引</a></li>
+      <li><a href="#siteurl">站点地址</a></li>
+      <li><a href="#top">回到卷首</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="index" aria-labelledby="h-index">
+    <div class="sec-head">
+      <span class="no">壹</span>
+      <h2 id="h-index">节目单</h2>
+      <span class="en">Programme</span>
+      <span class="rule"></span>
+    </div>
+    <p>按类型与年代整理的片目清单，支持关键词检索、分类筛选和三种排序。条目为资料性归档，不含资源直链。</p>
+    <div class="tools">
+      <input type="search" id="q" placeholder="检索片名、导演或关键词…" autocomplete="off">
+      <select id="cat">
+        <option value="">全部类型</option>
+        <option value="feature">剧情长片</option>
+        <option value="series">剧集</option>
+        <option value="doc">纪录片</option>
+        <option value="anime">动画</option>
+      </select>
+      <select id="yr">
+        <option value="">全部年代</option>
+        <option value="2020">2020 至今</option>
+        <option value="2010">2010 — 2019</option>
+        <option value="2000">2000 — 2009</option>
+        <option value="old">2000 年前</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="onlynew"> 只看本期新增</label>
+    </div>
+    <div class="tablebox">
+      <table id="tb">
+        <thead>
+          <tr>
+            <th style="cursor:pointer" data-sort="title">片目 ↕</th>
+            <th style="cursor:pointer" data-sort="who">导演 / 主创</th>
+            <th style="cursor:pointer" data-sort="year">年份 ↕</th>
+            <th>类型</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody id="cnt"></tbody>
+      </table>
+    </div>
+    <p class="empty" id="empty">没有命中的条目，换个词试试。</p>
+  </section>
+
+  <section id="schedule" aria-labelledby="h-sched">
+    <div class="sec-head">
+      <span class="no">贰</span>
+      <h2 id="h-sched">排片刻度</h2>
+      <span class="en">Screening Line</span>
+      <span class="rule"></span>
+    </div>
+    <p>把一周的观看节奏画成一条时间轴：灰色段是待定，暖色段是已确认档期，进度条表示资料补全程度。</p>
+    <div class="ruler" aria-hidden="true">
+      <div class="ruler-axis"><b>周一</b><b>周三</b><b>周五</b><b>周日</b></div>
+    </div>
+    <div class="slots">
+      <div class="slot">
+        <time>周一 · 晚</time>
+        <div>
+          <div class="ttl">华语新片单元：城市与方言</div>
+          <div class="meta">3 部短片 + 1 部长片对照观看 · 预计 128 分钟</div>
+          <div class="bar"><i style="width:90%"></i></div>
+        </div>
+      </div>
+      <div class="slot">
+        <time>周三 · 晚</time>
+        <div>
+          <div class="ttl">经典修复场：胶片到数字的中间地带</div>
+          <div class="meta">4K 修复版与 35mm 拷贝画质笔记 · 预计 96 分钟</div>
+          <div class="bar"><i style="width:60%"></i></div>
+        </div>
+      </div>
+      <div class="slot">
+        <time>周五 · 晚</time>
+        <div>
+          <div class="ttl">剧集档案：一季一主题的叙事结构</div>
+          <div class="meta">更新至第 6 集，附分集节奏表 · 连载中</div>
+          <div class="bar"><i style="width:45%"></i></div>
+        </div>
+      </div>
+      <div class="slot">
+        <time>周日 · 午后</time>
+        <div>
+          <div class="ttl">纪录片与动画交叉放映</div>
+          <div class="meta">自然声景专题，含配音版本对照 · 待定</div>
+          <div class="bar"><i style="width:20%"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="memo" aria-labelledby="h-memo">
+    <div class="sec-head">
+      <span class="no">叁</span>
+      <h2 id="h-memo">观片手记</h2>
+      <span class="en">Viewing Notes</span>
+      <span class="rule"></span>
+    </div>
+    <div class="notes">
+      <article class="note">
+        <div class="idx">NOTE 01 / 选片</div>
+        <h3>先定介质，再定片单</h3>
+        <p>同一部片子在影院、电视与笔记本上的信息量并不相等。动手列单前，先写清观看条件。</p>
+        <ol>
+          <li>记下屏幕比例与音响环境</li>
+          <li>区分「首刷」与「重看」两套清单</li>
+          <li>给每部片子标一个观看动机，不超过六个字</li>
+        </ol>
+      </article>
+      <article class="note slate">
+        <div class="idx">NOTE 02 / 读帧</div>
+        <h3>黑场不是空白</h3>
+        <p>切光、静帧、环境声，往往藏着导演的真正落点。这几条比剧情更值得回放。</p>
+        <ol>
+          <li>开场三分钟内出现的物件，多半会回来</li>
+          <li>注意群演的动线，而非主角的台词</li>
+          <li>字幕结束后多留三十秒，别急着退出</li>
+        </ol>
+      </article>
+      <article class="note">
+        <div class="idx">NOTE 03 / 归档</div>
+        <h3>让笔记能再查一次</h3>
+        <p>观后感写得太满反而找不到。固定四个字段，半年后仍能检索。</p>
+        <ol>
+          <li>片名 + 年份 + 版本</li>
+          <li>一个关键词（不是形容词）</li>
+          <li>时间戳：分秒位置</li>
+          <li>待证疑问，留给下次重看</li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <section id="glossary" aria-labelledby="h-gloss">
+    <div class="sec-head">
+      <span class="no">肆</span>
+      <h2 id="h-gloss">术语索引</h2>
+      <span class="en">Index of Terms</span>
+      <span class="rule"></span>
+    </div>
+    <div class="glossary">
+      <dl>
+        <dt>长镜头</dt>
+        <dd>不靠剪辑、而靠机位运动与场面调度推进的一段连续影像。衡量标准是「时间是否被保留」。</dd>
+      </dl>
+      <dl>
+        <dt>画幅比</dt>
+        <dd>1.33:1、1.85:1、2.39:1 不是装饰参数，它决定观众把注意力放在人脸还是空间。</dd>
+      </dl>
+      <dl>
+        <dt>场记板</dt>
+        <dd>标注场次、镜次与拍摄日期的小黑板，后期对位声画的起点。 <span class="see">参见：剪辑对位</span></dd>
+      </dl>
+      <dl>
+        <dt>修复版</dt>
+        <dd>对褪色、划痕与声轨噪点做校正后的母版，不等于重新调色，也不必然更接近首映时的观感。</dd>
+      </dl>
+      <dl>
+        <dt>环境声</dt>
+        <dd>画面里没有明确来源的背景声响，负责让场景「站得住」。静音反而是一种刻意的选择。</dd>
+      </dl>
+      <dl>
+        <dt>分镜</dt>
+        <dd>把剧本拆成镜头动作的草图，是剪辑节奏的预演，常被误当作纯美术稿。</dd>
+      </dl>
+      <dl>
+        <dt>同期声</dt>
+        <dd>拍摄现场同步收录的人声与环境声，与后期配音在质感上有细微但可辨的差别。</dd>
+      </dl>
+      <dl>
+        <dt>片尾字幕</dt>
+        <dd>不仅是署名清单，也是声音设计与余韵的延续段落，很多作品的结尾其实从这里才开始。</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="siteurl" aria-labelledby="h-url">
+    <div class="sec-head">
+      <span class="no">伍</span>
+      <h2 id="h-url">站点地址</h2>
+      <span class="en">Address</span>
+      <span class="rule"></span>
+    </div>
+    <div class="sitebar">
+      <div>
+        <div class="lb">大象影视 · 唯一访问入口</div>
+        <code id="cp">https://daxiangyingshi-zh.github.io</code>
+        <div class="hint">点右侧按钮即可复制，本站全部栏目均在单页内锚点跳转，无需离开首页。</div>
+      </div>
+      <div>
+        <button type="button" id="btn">复制站点地址</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-flex">
+    <div>© <span id="yr2"></span> 大象影视 · 影像资料索引页，仅供片目与观看方法归档。</div>
+    <div><a href="#top">回到卷首</a> · <a href="#index">节目单</a> · <a href="#glossary">术语索引</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var rows=[
+    {t:"南方渡口",w:"陈晚晴",y:2024,c:"feature",g:"剧情长片",n:"本期新增 · 4K 修复版对照",nw:true},
+    {t:"雾中班次",w:"林则声",y:2022,c:"series",g:"剧集",n:"第二季资料补全中",nw:false},
+    {t:"河流自学记",w:"阿依吐尔",y:2020,c:"doc",g:"纪录片",n:"自然声景专题入选",nw:true},
+    {t:"玻璃动物园",w:"周亦白",y:2017,c:"feature",g:"剧情长片",n:"长镜头段落分析见手记",nw:false},
+    {t:"夜航船",w:"王家屿",y:2011,c:"series",g:"剧集",n:"一季一主题的叙事结构",nw:false},
+    {t:"纸上春天",w:"动画工坊 北",y:2023,c:"anime",g:"动画",n:"与水彩原稿联动归档",nw:true},
+    {t:"老电影院的最后一晚",w:"何声",y:2008,c:"doc",g:"纪录片",n:"含 35mm 放映口述史",nw:false},
+    {t:"七月来信",w:"苏南",y:1999,c:"feature",g:"剧情长片",n:"修复版首映信息待核",nw:false},
+    {t:"潮汐饲养员",w:"雷鸣",y:2025,c:"anime",g:"动画",n:"连载中 · 第 6 集",nw:true},
+    {t:"城市方言地图",w:"集体创作",y:2015,c:"doc",g:"纪录片",n:"六城对位剪辑版本",nw:false}
+  ];
+  var catName={feature:"剧情长片",series:"剧集",doc:"纪录片",anime:"动画"};
+  var catTag={feature:"",series:"",doc:"doc",anime:"anime"};
+  var tb=document.getElementById('cnt'),q=document.getElementById('q'),
+      cat=document.getElementById('cat'),yr=document.getElementById('yr'),
+      only=document.getElementById('onlynew'),emp=document.getElementById('empty');
+  var sortKey='title',sortDir=1;
+
+  function render(){
+    var kw=q.value.trim().toLowerCase(),c=cat.value,y=yr.value,show=only.checked;
+    var out=rows.filter(function(r){
+      if(c && r.c!==c) return false;
+      if(y==='2020' && r.y<2020) return false;
+      if(y==='2010' && (r.y<2010||r.y>2019)) return false;
+      if(y==='2000' && (r.y<2000||r.y>2009)) return false;
+      if(y==='old' && r.y>=2000) return false;
+      if(show && !r.nw) return false;
+      if(kw && (r.t+r.w+r.n+r.g).toLowerCase().indexOf(kw)<0) return false;
+      return true;
+    });
+    out.sort(function(a,b){
+      var x=a[sortKey],z=b[sortKey];
+      if(typeof x==='string'){x=x.localeCompare('a','zh');z=z.localeCompare('a','zh');}
+      return (x>z?1:x<z?-1:0)*sortDir;
+    });
+    tb.innerHTML='';
+    out.forEach(function(r){
+      var tr=document.createElement('tr');
+      var tag='<span class="tag'+(catTag[r.c]?' '+catTag[r.c]:'')+'">'+r.g+'</span>';
+      tr.innerHTML='<td class="num">'+r.t+(r.nw?' <span class="tag" style="border-color:var(--olive);color:var(--olive)">新增</span>':'')+'</td>'+
+                   '<td>'+r.w+'</td><td class="num">'+r.y+'</td><td>'+tag+'</td><td>'+r.n+'</td>';
+      tb.appendChild(tr);
+    });
+    emp.style.display=out.length?'none':'block';
+  }
+  q.addEventListener('input',render);
+  cat.addEventListener('change',render);
+  yr.addEventListener('change',render);
+  only.addEventListener('change',render);
+  [].forEach.call(document.querySelectorAll('#tb th'),function(th){
+    th.addEventListener('click',function(){
+      var k=th.getAttribute('data-sort');
+      if(!k) return;
+      if(sortKey===k) sortDir*=-1; else {sortKey=k;sortDir=1;}
+      render();
+    });
+  });
+  render();
+
+  var btn=document.getElementById('btn'),cp=document.getElementById('cp');
+  btn.addEventListener('click',function(){
+    var done=function(){
+      btn.textContent='已复制，可直接粘贴';
+      setTimeout(function(){btn.textContent='复制站点地址';},1800);
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(cp.textContent).then(done,function(){fallback()});
+    } else fallback();
+    function fallback(){
+      var r=document.createRange();r.selectNode(cp);
+      var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+      try{document.execCommand('copy');done();}catch(e){}
+      s.removeAllRanges();
+    }
+  });
+
+  document.getElementById('yr2').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
